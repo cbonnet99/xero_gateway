@@ -4,7 +4,7 @@ module XeroGateway
     include Money
     
     # All accessible fields
-    attr_accessor :invoice_id, :invoice_number, :invoice_type, :invoice_status, :date, :due_date, :reference, :tax_inclusive, :includes_tax, :sub_total, :total_tax, :total, :line_items, :contact
+    attr_accessor :invoice_id, :invoice_number, :invoice_type, :invoice_status, :date, :due_date, :reference, :tax_inclusive, :includes_tax, :sub_total, :total_tax, :total, :line_items, :contact, :fully_paid_on_date
     
     def initialize(params = {})
       params = {
@@ -39,6 +39,7 @@ module XeroGateway
         b.InvoiceType self.invoice_type
         contact.to_xml(b)
         b.InvoiceDate Invoice.format_date_time(self.date)
+        b.FullyPaidOnDate Invoice.format_date_time(self.fully_paid_on_date) if self.fully_paid_on_date
         b.DueDate Invoice.format_date_time(self.due_date) if self.due_date
         b.InvoiceNumber self.invoice_number
         b.Reference self.reference if self.reference
@@ -64,6 +65,7 @@ module XeroGateway
           when "InvoiceNumber" then invoice.invoice_number = element.text            
           when "InvoiceType" then invoice.invoice_type = element.text
           when "InvoiceDate" then invoice.date = parse_date_time(element.text)
+          when "FullyPaidOnDate" then invoice.fully_paid_on_date = parse_date_time(element.text)
           when "DueDate" then invoice.due_date = parse_date_time(element.text)
           when "Reference" then invoice.reference = element.text
           when "TaxInclusive" then invoice.tax_inclusive = (element.text == "true")
