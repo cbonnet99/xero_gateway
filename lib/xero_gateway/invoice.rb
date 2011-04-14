@@ -1,7 +1,7 @@
 module XeroGateway
   class Invoice
-    include Dates
-    include Money
+    include XeroGateway::Dates
+    include XeroGateway::Money
     
     # All accessible fields
     attr_accessor :invoice_id, :invoice_number, :invoice_type, :invoice_status, :date, :due_date, :reference, :tax_inclusive, :includes_tax, :sub_total, :total_tax, :total, :line_items, :contact, :fully_paid_on_date
