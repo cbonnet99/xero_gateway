@@ -1,6 +1,6 @@
 module XeroGateway
   class Contact
-    include XeroGateway::Dates
+    include Dates
     
     attr_accessor :contact_id, :contact_number, :status, :name, :email, :addresses, :phones, :updated_at
     
