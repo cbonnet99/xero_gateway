@@ -6,7 +6,6 @@ Gem::Specification.new do |s|
   s.email    = "tlconnor@gmail.com"
   s.homepage = "http://github.com/tlconnor/xero_gateway"
   s.description = "Enables ruby based applications to communicate with the Xero API"
-  s.has_rdoc = false
   s.authors  = ["Tim Connor"]
   s.add_dependency('builder', '>= 2.1.2')
   s.files    = ["CHANGELOG.textile",
